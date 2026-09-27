@@ -1,0 +1,11 @@
+# PyTorch build used for the released checkpoints (CUDA 12.4).
+#
+#     pip install -r requirements/torch-cu124.txt \
+#         --index-url https://download.pytorch.org/whl/cu124
+#
+# If your driver needs a different CUDA build, change the suffix in the index URL.
+# Nothing else in requirements/ depends on which build this is.
+
+torch==2.6.0
+torchvision==0.21.0
+torchaudio==2.6.0

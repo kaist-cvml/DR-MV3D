@@ -1,0 +1,16 @@
+# Conda environment for DR-MV3D.
+#
+#   conda env create -f environment.yml
+#   conda activate drmv3d
+#   pip install -r requirements/torch-cu124.txt --index-url https://download.pytorch.org/whl/cu124
+#   pip install -e .
+#
+# This file creates the interpreter and nothing else. Everything installable with
+# pip is pinned under requirements/, in the order it has to be installed: PyTorch
+# first, because the rest builds against it.
+name: drmv3d
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip

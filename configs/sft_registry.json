@@ -1,0 +1,10 @@
+{
+  "drmv3d": {
+    "annotation_path": "sft/MindCube_train_drmv3d_qwen_sft.json",
+    "data_path": "./"
+  },
+  "drmv3d_pseudo": {
+    "annotation_path": "sft/MindCube_train_drmv3d_pseudo_qwen_sft.json",
+    "data_path": "./"
+  }
+}

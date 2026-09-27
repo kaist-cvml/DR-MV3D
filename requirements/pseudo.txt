@@ -1,0 +1,19 @@
+# Cognitive maps estimated from images, rather than derived from the benchmark
+# annotations. Nothing else in the repository needs these.
+#
+#     pip install -r requirements/pseudo.txt
+#     bash scripts/setup_third_party.sh pseudo
+#
+# VGGT and SAM 3 are not on PyPI; the setup script clones them into modules/ and
+# fetches the weights. SAM 3's weights are licence-gated, so accept the licence
+# and export HF_TOKEN first. See docs/pseudo_cogmap.md.
+
+# Both models are installed with --no-deps, to keep them from repinning torch, so
+# what they need is pinned here instead. einops is VGGT's; the rest are SAM 3's.
+einops>=0.7
+timm>=1.0
+iopath>=0.1.9
+ftfy>=6.1
+
+# SAM 3's video loader, used by the sam3_track backend.
+opencv-python-headless>=4.9

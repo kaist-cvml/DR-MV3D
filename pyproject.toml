@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "drmv3d"
+version = "1.0.0"
+description = "DR-MV3D: Dense Reward for Multi-View 3D Reasoning with Global Maps and Local Views"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Jiho Choi" },
+    { name = "Seonho Lee" },
+    { name = "Seojeong Park" },
+    { name = "Hyunjung Shim" },
+]
+keywords = ["multi-view", "spatial-reasoning", "vision-language-model", "grpo"]
+classifiers = [
+    "Programming Language :: Python :: 3.10",
+    "License :: OSI Approved :: MIT License",
+]
+
+# Read from requirements/base.txt so the two cannot drift. PyTorch is installed
+# separately because it needs its own index URL, and the training stack because
+# parts of it need build flags no package metadata can express; see requirements/.
+dynamic = ["dependencies"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7",
+    "ruff>=0.6",
+]
+
+[tool.setuptools.dynamic]
+dependencies = { file = ["requirements/base.txt"] }
+
+[project.urls]
+Homepage = "https://dr-mv3d.github.io/"
+Repository = "https://github.com/kaist-cvml/DR-MV3D"
+
+[tool.setuptools.packages.find]
+include = ["drmv3d*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+# Vendored third-party code is kept as its authors wrote it.
+extend-exclude = ["third_party"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+# The prompt text is a released artifact reproduced byte for byte, trailing
+# whitespace included. Stripping it would change every generated prompt.
+"drmv3d/scaffold/cogmap.py" = ["W291"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
