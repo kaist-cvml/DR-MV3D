@@ -140,6 +140,32 @@ wait
 python scripts/run_evaluation.py results/shard*.jsonl
 ```
 
+### Score saved responses on CPU
+
+The standalone scorer runs on CPU with Python 3.10+ and its standard library.
+It reads saved responses directly, without running model inference or loading a
+checkpoint. Each JSONL record should contain `id`, `gt_answer` (the correct
+option letter), and `answer` (the full response text).
+
+From the repository root, save these two synthetic lines as
+`drmv3d-scout-responses.jsonl`.
+
+```jsonl
+{"id":"among_demo","gt_answer":"A","answer":"<answer>A. Example</answer>"}
+{"id":"rotation_demo","gt_answer":"B","answer":"I cannot tell."}
+```
+
+```bash
+python scripts/run_evaluation.py drmv3d-scout-responses.jsonl --output drmv3d-scout-scores.json
+```
+
+The output JSON should report `total: 2`, `correct: 1`, `accuracy: 0.5`, and
+`unparseable: 1`. Under `settings`, `among` has 1 correct out of 1, and
+`rotation` has 0 correct out of 1 with 1 unparseable response.
+
+Use this synthetic example only as an evaluator smoke test. Reproducing the
+paper's reported results requires benchmark data and model responses.
+
 ## Training
 
 Fine-tuning, on four GPUs. `configs/sft.sh` holds the released hyperparameters, and
